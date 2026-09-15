@@ -1,0 +1,100 @@
+const Database = require("better-sqlite3");
+const path = require("path");
+const fs = require("fs");
+
+const dataDirectory = path.join(__dirname, "data");
+
+if (!fs.existsSync(dataDirectory)) {
+    fs.mkdirSync(dataDirectory);
+}
+
+const db = new Database(path.join(dataDirectory, "marketplace.db"));
+
+db.pragma("foreign_keys = ON");
+
+db.exec(`
+    CREATE TABLE IF NOT EXISTS gigs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        creator_name TEXT NOT NULL,
+        title TEXT NOT NULL,
+        category TEXT NOT NULL,
+        rate REAL NOT NULL,
+        description TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS bookings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        gig_id INTEGER NOT NULL,
+        client_name TEXT NOT NULL,
+        client_email TEXT NOT NULL,
+        message TEXT,
+        status TEXT NOT NULL DEFAULT 'Pending',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+        FOREIGN KEY (gig_id)
+        REFERENCES gigs(id)
+        ON DELETE CASCADE
+    );
+`);
+
+const gigCount = db.prepare("SELECT COUNT(*) AS count FROM gigs").get().count;
+
+if (gigCount === 0) {
+    const insertGig = db.prepare(`
+        INSERT INTO gigs
+        (creator_name, title, category, rate, description)
+        VALUES (?, ?, ?, ?, ?)
+    `);
+
+    const sampleGigs = [
+        [
+            "Maya",
+            "I will design a modern social media poster",
+            "Design",
+            25,
+            "Clean, modern and eye-catching social media graphics for your brand, event or personal project."
+        ],
+        [
+            "Alex",
+            "I will edit your short-form video",
+            "Video",
+            40,
+            "Fast-paced edits for Reels, Shorts and TikTok with captions, transitions and music."
+        ],
+        [
+            "Jordan",
+            "I will build a simple landing page",
+            "Development",
+            60,
+            "A responsive and clean landing page built for portfolios, small businesses and personal projects."
+        ],
+        [
+            "Aarav",
+            "I will photograph your event",
+            "Photography",
+            80,
+            "Natural event photography with carefully selected and edited final images."
+        ],
+        [
+            "Zoya",
+            "I will write engaging captions for your brand",
+            "Writing",
+            20,
+            "Creative captions designed to match your tone and make your content more engaging."
+        ],
+        [
+            "Sam",
+            "I will create a custom music loop",
+            "Music",
+            35,
+            "Original short music loops for videos, games, streams and creative projects."
+        ]
+    ];
+
+    for (const gig of sampleGigs) {
+        insertGig.run(...gig);
+    }
+}
+
+module.exports = db;
