@@ -2,7 +2,7 @@
 
 > Find talent. Book skills. Create more.
 
-CreatorHub is a simple creator gig marketplace built for the hackathon.
+SkillSwap is a simple creator gig marketplace built for the hackathon.
 
 ## Hackathon ID
 
