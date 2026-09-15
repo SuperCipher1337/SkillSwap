@@ -6,7 +6,7 @@ CreatorHub is a simple creator gig marketplace built for the hackathon.
 
 ## Hackathon ID
 
-YOUR_HACKATHON_ID_HERE
+AZIS - CGHFYT
 
 ## Track
 
