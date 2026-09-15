@@ -2,626 +2,508 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreatorHub — Find Talent. Book Skills.</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>CreatorHub — Find. Create. Collaborate.</title>
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+    <!-- IMPORTANT: style.css is in the same folder -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ==========================================
-     NAVIGATION
-========================================== -->
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
 
-<header class="navbar">
+        <div class="logo">
+            <span class="logo-mark">✦</span>
+            CreatorHub
+        </div>
 
-    <a href="#" class="logo" onclick="showPage('marketplace')">
-        <span class="logo-mark">✦</span>
-        CreatorHub
-    </a>
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="showPage('marketplace')">
+                Marketplace
+            </button>
 
-    <nav class="nav-links">
+            <button class="nav-btn" onclick="showPage('post')">
+                Post a Gig
+            </button>
 
-        <button
-            class="nav-link active"
-            data-page="marketplace"
-            onclick="showPage('marketplace')"
-        >
-            Marketplace
-        </button>
+            <button class="nav-btn" onclick="showPage('dashboard')">
+                Creator Dashboard
+            </button>
 
-        <button
-            class="nav-link"
-            data-page="post-gig"
-            onclick="showPage('post-gig')"
-        >
-            Post a Gig
-        </button>
+            <button class="nav-btn" onclick="showPage('bookings')">
+                My Bookings
+            </button>
+        </div>
 
-        <button
-            class="nav-link"
-            data-page="creator-dashboard"
-            onclick="showPage('creator-dashboard')"
-        >
-            Creator Dashboard
-        </button>
+        <div class="user-area">
+            <span>Viewing as</span>
 
-        <button
-            class="nav-link"
-            data-page="my-bookings"
-            onclick="showPage('my-bookings')"
-        >
-            My Bookings
-        </button>
+            <select id="currentUser" onchange="changeUser()">
+                <option value="Alex">Alex</option>
+                <option value="Maya">Maya</option>
+                <option value="Jordan">Jordan</option>
+                <option value="Aarav">Aarav</option>
+                <option value="Zoya">Zoya</option>
+                <option value="Sam">Sam</option>
+                <option value="Mansha">Mansha</option>
+            </select>
+        </div>
 
     </nav>
 
-    <div class="user-switcher">
 
-        <span class="user-label">Viewing as</span>
+    <!-- ================= MARKETPLACE ================= -->
 
-        <select id="currentUser">
-            <option value="Alex">Alex</option>
-            <option value="Maya">Maya</option>
-            <option value="Jordan">Jordan</option>
-            <option value="Aarav">Aarav</option>
-            <option value="Zoya">Zoya</option>
-            <option value="Sam">Sam</option>
-        </select>
+    <main id="marketplace" class="page active-page">
 
-    </div>
+        <section class="hero">
 
-</header>
+            <div class="hero-text">
 
+                <div class="eyebrow">
+                    ✦ THE CREATOR MARKETPLACE
+                </div>
 
-<!-- ==========================================
-     MAIN
-========================================== -->
+                <h1>
+                    Your skill is
+                    <span>worth something.</span>
+                </h1>
 
-<main>
+                <p>
+                    Discover talented young creators, book their skills,
+                    and turn creative ideas into reality.
+                </p>
 
+                <div class="hero-buttons">
+                    <button class="primary-btn" onclick="showPage('marketplace')">
+                        Explore gigs →
+                    </button>
 
-<!-- ==========================================
-     MARKETPLACE
-========================================== -->
+                    <button class="secondary-btn" onclick="showPage('post')">
+                        Offer your skill
+                    </button>
+                </div>
 
-<section
-    id="marketplace"
-    class="page active-page"
->
-
-    <div class="hero">
-
-        <div class="hero-content">
-
-            <div class="eyebrow">
-                ✦ THE CREATOR MARKETPLACE
             </div>
 
-            <h1>
-                Find skills.<br>
-                <span>Make things happen.</span>
-            </h1>
+            <div class="hero-art">
 
-            <p>
-                Discover talented creators for your next project,
-                idea or collaboration.
-            </p>
+                <div class="yellow-circle"></div>
 
-            <button
-                class="primary-button"
-                onclick="document.getElementById('gigGrid').scrollIntoView({behavior:'smooth'})"
-            >
-                Explore gigs ↓
-            </button>
+                <div class="floating-card card-one">
+                    <span>🎨</span>
+                    <div>
+                        <strong>Design</strong>
+                        <small>Creative work</small>
+                    </div>
+                </div>
 
-        </div>
+                <div class="floating-card card-two">
+                    <span>🎬</span>
+                    <div>
+                        <strong>Video</strong>
+                        <small>Editing & reels</small>
+                    </div>
+                </div>
 
-        <div class="hero-art">
+                <div class="floating-card card-three">
+                    <span>💻</span>
+                    <div>
+                        <strong>Development</strong>
+                        <small>Web & code</small>
+                    </div>
+                </div>
 
-            <div class="floating-card card-one">
-                <span>✦</span>
-                Design
+                <div class="hero-star">✦</div>
+
             </div>
 
-            <div class="floating-card card-two">
-                <span>◉</span>
-                Video
+        </section>
+
+
+        <!-- MARKETPLACE HEADER -->
+
+        <section class="marketplace-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-label">EXPLORE</p>
+                    <h2>Find your next creator</h2>
+                </div>
+
+                <p class="result-count" id="resultCount">
+                    0 gigs
+                </p>
+
             </div>
 
-            <div class="floating-card card-three">
-                <span>⌁</span>
-                Code
-            </div>
 
-            <div class="hero-circle">
-                <div>CREATE</div>
-                <div>TOGETHER</div>
-            </div>
+            <!-- SEARCH / FILTERS -->
 
-        </div>
+            <div class="controls">
 
-    </div>
-
-
-    <!-- SEARCH -->
-
-    <div class="marketplace-controls">
-
-        <div class="search-box">
-
-            <span>⌕</span>
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search gigs, creators or skills..."
-            >
-
-        </div>
-
-        <select id="categoryFilter">
-
-            <option value="All">All categories</option>
-            <option value="Design">Design</option>
-            <option value="Video">Video</option>
-            <option value="Music">Music</option>
-            <option value="Development">Development</option>
-            <option value="Photography">Photography</option>
-            <option value="Writing">Writing</option>
-
-        </select>
-
-        <select id="sortFilter">
-
-            <option value="newest">Newest first</option>
-            <option value="price-low">Price: low to high</option>
-            <option value="price-high">Price: high to low</option>
-
-        </select>
-
-    </div>
-
-
-    <div class="section-heading">
-
-        <div>
-            <p class="eyebrow">EXPLORE</p>
-            <h2>Fresh from the community</h2>
-        </div>
-
-        <span id="gigCount" class="result-count">
-            0 gigs
-        </span>
-
-    </div>
-
-
-    <div id="gigGrid" class="gig-grid">
-        <!-- JavaScript inserts gigs -->
-    </div>
-
-</section>
-
-
-
-<!-- ==========================================
-     POST A GIG
-========================================== -->
-
-<section
-    id="post-gig"
-    class="page"
->
-
-    <div class="page-header">
-
-        <div>
-            <p class="eyebrow">CREATOR MODE</p>
-
-            <h1>
-                Turn your skill<br>
-                into a <span>gig.</span>
-            </h1>
-
-            <p>
-                Tell people what you can create and what
-                you'd like to charge.
-            </p>
-        </div>
-
-    </div>
-
-
-    <div class="form-card">
-
-        <form id="gigForm">
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>Creator name</label>
+                <div class="search-box">
+                    <span>⌕</span>
 
                     <input
                         type="text"
-                        id="gigCreator"
-                        placeholder="Your name"
-                        required
+                        id="searchInput"
+                        placeholder="Search for a skill, service or creator..."
+                        oninput="filterGigs()"
                     >
-
                 </div>
 
-                <div class="form-group">
+                <select id="categoryFilter" onchange="filterGigs()">
 
-                    <label>Category</label>
+                    <option value="All">All categories</option>
+                    <option value="Design">Design</option>
+                    <option value="Video">Video</option>
+                    <option value="Music">Music</option>
+                    <option value="Development">Development</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Writing">Writing</option>
+
+                </select>
+
+                <select id="sortFilter" onchange="filterGigs()">
+
+                    <option value="newest">Newest First</option>
+                    <option value="priceLow">Price: Low → High</option>
+                    <option value="priceHigh">Price: High → Low</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- GIGS -->
+
+            <div id="gigGrid" class="gig-grid"></div>
+
+            <div id="noResults" class="no-results hidden">
+
+                <div>🔎</div>
+
+                <h3>No gigs found</h3>
+
+                <p>
+                    Try another search or category.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= POST A GIG ================= -->
+
+    <main id="post" class="page">
+
+        <section class="form-section">
+
+            <div class="form-intro">
+
+                <p class="section-label">CREATOR MODE</p>
+
+                <h2>Turn your skill<br>into a gig.</h2>
+
+                <p>
+                    Tell clients what you can create, how much it costs,
+                    and why they should book you.
+                </p>
+
+                <div class="tip-box">
+                    <strong>✦ Quick tip</strong>
+                    <p>
+                        A clear title and specific description make your
+                        gig easier to discover.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <form id="gigForm" class="form-card">
+
+                <h3>Post a new gig</h3>
+
+                <p class="form-subtitle">
+                    Your gig will immediately appear in the marketplace.
+                </p>
+
+
+                <label>
+                    Your name
+
+                    <input
+                        type="text"
+                        id="creatorName"
+                        required
+                        placeholder="e.g. Mansha"
+                    >
+                </label>
+
+
+                <label>
+                    Gig title
+
+                    <input
+                        type="text"
+                        id="gigTitle"
+                        required
+                        placeholder="I will design a modern poster"
+                    >
+                </label>
+
+
+                <label>
+                    Category
 
                     <select id="gigCategory" required>
 
                         <option value="">Choose a category</option>
-                        <option>Design</option>
-                        <option>Video</option>
-                        <option>Music</option>
-                        <option>Development</option>
-                        <option>Photography</option>
-                        <option>Writing</option>
+                        <option value="Design">Design</option>
+                        <option value="Video">Video</option>
+                        <option value="Music">Music</option>
+                        <option value="Development">Development</option>
+                        <option value="Photography">Photography</option>
+                        <option value="Writing">Writing</option>
 
                     </select>
+                </label>
 
+
+                <label>
+                    Price / rate ($)
+
+                    <input
+                        type="number"
+                        id="gigRate"
+                        min="1"
+                        required
+                        placeholder="25"
+                    >
+                </label>
+
+
+                <label>
+                    Description
+
+                    <textarea
+                        id="gigDescription"
+                        required
+                        placeholder="Describe exactly what the client will receive..."
+                    ></textarea>
+
+                </label>
+
+
+                <button class="primary-btn full-btn" type="submit">
+                    Publish gig →
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= CREATOR DASHBOARD ================= -->
+
+    <main id="dashboard" class="page">
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="section-label">CREATOR SPACE</p>
+                    <h2>Creator Dashboard</h2>
+
+                    <p class="dashboard-user">
+                        Viewing bookings for
+                        <strong id="dashboardUser">Alex</strong>
+                    </p>
                 </div>
 
             </div>
 
 
-            <div class="form-group">
+            <div class="stats">
 
-                <label>Gig title</label>
+                <div class="stat-card">
+                    <span>📥</span>
+                    <div>
+                        <small>PENDING</small>
+                        <strong id="pendingCount">0</strong>
+                    </div>
+                </div>
 
-                <input
-                    type="text"
-                    id="gigTitle"
-                    placeholder="e.g. I will design your brand logo"
-                    required
-                >
+                <div class="stat-card">
+                    <span>✓</span>
+                    <div>
+                        <small>ACCEPTED</small>
+                        <strong id="acceptedCount">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <span>▣</span>
+                    <div>
+                        <small>TOTAL</small>
+                        <strong id="totalCount">0</strong>
+                    </div>
+                </div>
 
             </div>
 
 
-            <div class="form-row">
+            <div class="dashboard-list">
 
-                <div class="form-group">
+                <div class="list-header">
 
-                    <label>Rate</label>
-
-                    <div class="price-input">
-
-                        <span>$</span>
-
-                        <input
-                            type="number"
-                            id="gigRate"
-                            placeholder="25"
-                            min="1"
-                            required
-                        >
-
+                    <div>
+                        <p class="section-label">INCOMING</p>
+                        <h3>Booking requests</h3>
                     </div>
 
                 </div>
 
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Description</label>
-
-                <textarea
-                    id="gigDescription"
-                    rows="6"
-                    placeholder="Describe what the client will receive..."
-                    required
-                ></textarea>
+                <div id="creatorBookings"></div>
 
             </div>
 
+        </section>
 
-            <button
-                type="submit"
-                class="primary-button large-button"
-            >
-                Publish gig ✦
+    </main>
+
+
+
+    <!-- ================= MY BOOKINGS ================= -->
+
+    <main id="bookings" class="page">
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="section-label">CLIENT SPACE</p>
+
+                    <h2>My Bookings</h2>
+
+                    <p class="dashboard-user">
+                        Your bookings as
+                        <strong id="bookingUser">Alex</strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div id="clientBookings" class="client-bookings"></div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= BOOKING MODAL ================= -->
+
+    <div id="bookingModal" class="modal hidden">
+
+        <div class="modal-overlay" onclick="closeModal()"></div>
+
+        <div class="modal-box">
+
+            <button class="close-btn" onclick="closeModal()">
+                ×
             </button>
 
-            <div id="gigMessage" class="form-message"></div>
+            <p class="section-label">BOOK THIS GIG</p>
 
-        </form>
+            <h2 id="modalGigTitle">
+                Gig title
+            </h2>
 
-    </div>
-
-</section>
-
-
-
-<!-- ==========================================
-     CREATOR DASHBOARD
-========================================== -->
-
-<section
-    id="creator-dashboard"
-    class="page"
->
-
-    <div class="page-header dashboard-header">
-
-        <div>
-
-            <p class="eyebrow">CREATOR MODE</p>
-
-            <h1>
-                Your <span>dashboard.</span>
-            </h1>
-
-            <p>
-                Manage incoming booking requests.
+            <p id="modalGigCreator" class="modal-creator">
+                By creator
             </p>
 
-        </div>
 
-        <div class="creator-current">
+            <form id="bookingForm">
 
-            <span>Creator</span>
-
-            <strong id="dashboardCreator">
-                Alex
-            </strong>
-
-        </div>
-
-    </div>
+                <input type="hidden" id="bookingGigId">
 
 
-    <div class="stats-grid">
+                <label>
+                    Your name
 
-        <div class="stat-card">
-
-            <span>Incoming</span>
-            <strong id="pendingCount">0</strong>
-            <small>pending requests</small>
-
-        </div>
-
-        <div class="stat-card">
-
-            <span>Accepted</span>
-            <strong id="acceptedCount">0</strong>
-            <small>active bookings</small>
-
-        </div>
-
-        <div class="stat-card">
-
-            <span>Total</span>
-            <strong id="totalCreatorBookings">0</strong>
-            <small>booking requests</small>
-
-        </div>
-
-    </div>
+                    <input
+                        type="text"
+                        id="clientName"
+                        required
+                    >
+                </label>
 
 
-    <div class="section-heading">
+                <label>
+                    Email
 
-        <div>
+                    <input
+                        type="email"
+                        id="clientEmail"
+                        required
+                        placeholder="you@example.com"
+                    >
+                </label>
 
-            <p class="eyebrow">INBOX</p>
-            <h2>Booking requests</h2>
+
+                <label>
+                    Message
+
+                    <textarea
+                        id="clientMessage"
+                        placeholder="Tell the creator what you need..."
+                    ></textarea>
+
+                </label>
+
+
+                <button class="primary-btn full-btn" type="submit">
+                    Send booking request →
+                </button>
+
+            </form>
 
         </div>
 
     </div>
 
 
-    <div
-        id="creatorBookings"
-        class="booking-list"
-    >
-    </div>
 
-</section>
+    <!-- ================= TOAST ================= -->
 
-
-
-<!-- ==========================================
-     MY BOOKINGS
-========================================== -->
-
-<section
-    id="my-bookings"
-    class="page"
->
-
-    <div class="page-header">
-
-        <div>
-
-            <p class="eyebrow">CLIENT MODE</p>
-
-            <h1>
-                Your <span>bookings.</span>
-            </h1>
-
-            <p>
-                Keep track of every creator you've reached out to.
-            </p>
-
-        </div>
-
+    <div id="toast" class="toast">
+        <span>✓</span>
+        <p id="toastMessage">Success!</p>
     </div>
 
 
-    <div class="client-profile-card">
 
-        <div class="avatar" id="clientAvatar">
-            A
-        </div>
-
-        <div>
-
-            <span>Currently viewing bookings for</span>
-
-            <strong id="clientName">
-                Alex
-            </strong>
-
-        </div>
-
-    </div>
-
-
-    <div
-        id="clientBookings"
-        class="booking-list"
-    >
-    </div>
-
-</section>
-
-</main>
-
-
-
-<!-- ==========================================
-     BOOKING MODAL
-========================================== -->
-
-<div
-    id="bookingModal"
-    class="modal hidden"
->
-
-    <div
-        class="modal-overlay"
-        onclick="closeBookingModal()"
-    ></div>
-
-    <div class="modal-card">
-
-        <button
-            class="modal-close"
-            onclick="closeBookingModal()"
-        >
-            ×
-        </button>
-
-        <p class="eyebrow">BOOK A CREATOR</p>
-
-        <h2 id="modalGigTitle">
-            Gig title
-        </h2>
-
-        <p id="modalGigDescription">
-            Description
-        </p>
-
-        <div class="modal-price">
-            $<span id="modalGigRate">0</span>
-        </div>
-
-
-        <form id="bookingForm">
-
-            <input
-                type="hidden"
-                id="bookingGigId"
-            >
-
-            <div class="form-group">
-
-                <label>Your name</label>
-
-                <input
-                    type="text"
-                    id="bookingClientName"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Email</label>
-
-                <input
-                    type="email"
-                    id="bookingClientEmail"
-                    placeholder="you@example.com"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Message <span>(optional)</span></label>
-
-                <textarea
-                    id="bookingMessage"
-                    rows="4"
-                    placeholder="Tell the creator what you need..."
-                ></textarea>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="primary-button large-button"
-            >
-                Send booking request
-            </button>
-
-            <div
-                id="bookingMessageStatus"
-                class="form-message"
-            ></div>
-
-        </form>
-
-    </div>
-
-</div>
-
-
-<!-- ==========================================
-     SUCCESS TOAST
-========================================== -->
-
-<div
-    id="toast"
-    class="toast"
->
-    <span>✦</span>
-    <span id="toastText">Success!</span>
-</div>
-
-
-<script src="js/app.js"></script>
-<script src="js/marketplace.js"></script>
-<script src="js/post-gig.js"></script>
-<script src="js/creator-dashboard.js"></script>
-<script src="js/my-bookings.js"></script>
+    <!-- IMPORTANT: script.js is in the same folder -->
+    <script src="script.js"></script>
 
 </body>
 </html>
